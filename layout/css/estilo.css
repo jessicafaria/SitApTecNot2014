@@ -1,0 +1,23 @@
+
+/* 
+    Created on : 21/10/2014, 19:28:24
+    Author     : Jessica Faria
+*/
+body {
+    background-color: fuchsia; color: white;
+}
+
+@media screen and (orientation: portrait) {
+    /* Retrato - Vertical */
+    .paisagem {display: none;}
+    .retrato {display: block;}
+}
+    
+    
+@media screen and (orientation: landscape){
+    /*Paisagem - Horizontal*/
+    .paisagem{display: block;}
+    .retrato{display: none;}
+}
+
+
