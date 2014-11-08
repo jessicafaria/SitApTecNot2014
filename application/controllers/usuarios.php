@@ -1,24 +1,25 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php 
+if (!defined('BASEPATH')) exit('No direct script access allowed');
  
-class Pessoas extends CI_Controller {
+class Usuarios extends CI_Controller {
  
     function __construct() {
         parent::__construct();
-        $this->load->model('pessoas_model');
+        $this->load->model('usuarios_model');
     }
  
     function index() 
     {
-        $data['titulo'] = "CRUD com CodeIgniter | Cadastro de Pessoas";
+        $data['titulo'] = "CRUD com CodeIgniter | Cadastro de Usuarios";
           /**
-         * Lista todos os registrosda tabela pessoas
+         * Lista todos os registrosda tabela usuario
          */
-        $data['pessoas'] = $this->pessoas_model->listar();
+        $data['usuarios'] = $this->usuarios_model->listar();
         /**
          * Carrega a view
          */
       
-        $this->load->view('pessoas_view.php', $data);
+        $this->load->view('usuarios_view.php', $data);
     }
     public function info() {
     phpinfo();
@@ -45,10 +46,10 @@ function inserir() {
 		$data['email'] = $this->input->post('email');
   		
  		/* Chama a função inserir do modelo */
-		if ($this->pessoas_model->inserir($data)) {
-			redirect('pessoas');
+		if ($this->usuarios_model->inserir($data)) {
+			redirect('usuarios');
 		} else {
-			log_message('error', 'Erro ao inserir a pessoa.');
+			log_message('error', 'Erro ao inserir o usuario.');
 		}
 	}
 }
@@ -56,10 +57,10 @@ function inserir() {
 function editar($id)  {
 		
 	/* Aqui vamos definir o título da página de edição */
-	$data['titulo'] = "CRUD com CodeIgniter | Editar Pessoa";
+	$data['titulo'] = "CRUD com CodeIgniter | Editar usuario";
  
  	/* Busca os dados da pessoa que será editada (id) */
-	$data['dados_pessoa'] = $this->pessoas_model->editar($id);
+	$data['dados_usuario'] = $this->usuarios_model->editar($id);
         
         /**
          * debug is on the table
@@ -72,7 +73,7 @@ function editar($id)  {
         **/
  
  	/* Carrega a página de edição com os dados da pessoa */
-	$this->load->view('pessoas_edit', $data);
+	$this->load->view('usuarios_edit', $data);
 }
  
 function atualizar() {
@@ -102,36 +103,36 @@ function atualizar() {
 	/* Executa a validação... */
 	if ($this->form_validation->run() === FALSE) {
 		/* Caso houver erro chama função editar do controlador novamente */
-		$this->editar($this->input->post('id'));
+		$this->editar($this->input->post('idusuario'));
 	} else {
 		/* Senão obtém os dados do formulário */
-		$data['id'] = $this->input->post('id');
+		$data['idusuario'] = $this->input->post('idusuario');
 		$data['nome'] = ucwords($this->input->post('nome'));
 		$data['email'] = strtolower($this->input->post('email'));
  
  		/* Executa a função atualizar do modelo passando como parâmetro os dados obtidos do formulário */
-		if ($this->pessoas_model->atualizar($data)) {
+		if ($this->usuarios_model->atualizar($data)) {
 			/* Caso sucesso ao atualizar, recarrega a página principal */
-			redirect('pessoas');
+			redirect('usuarios');
 		} else {
 			/* Senão exibe a mensagem de erro */
-			log_message('error', 'Erro ao atualizar a pessoa.');
+			log_message('error', 'Erro ao atualizar a o usuario.');
 		}
 	}
 }
  
-function deletar($id) {
+function deletar($idusuario) {
  
 	/* Carrega o modelo */
-	$this->load->model('pessoas_model');
+	$this->load->model('usuarios_model');
  
 	/* Executa a função deletar do modelo passando como parâmetro o id da pessoa */
-	if ($this->pessoas_model->deletar($id)) {
+	if ($this->usuarios_model->deletar($idusuario)) {
 		/* Caso sucesso ao atualizar, recarrega a página principal */
-		redirect('pessoas');
+		redirect('usuarios');
 	} else {
 		/* Senão exibe a mensagem de erro */
-		log_message('error', 'Erro ao deletar a pessoa.');
+		log_message('error', 'Erro ao deletar o usuario.');
 	}
 }
 
