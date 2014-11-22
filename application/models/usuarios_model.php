@@ -18,7 +18,7 @@ class Usuarios_model extends CI_Model {
         return $query->result();
     }
 
-    function editar($idusuario) { 
+    function editar($idusuario) {
         $this->db->where('idusuario', $idusuario);
         $query = $this->db->get('usuario');
         return $query->result();
